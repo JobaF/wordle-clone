@@ -1,5 +1,9 @@
 import GuessesView from './guessesView'
 
 export default function Home() {
-  return <GuessesView />
+  return (
+    <div className="mt-6">
+      <GuessesView />
+    </div>
+  )
 }
