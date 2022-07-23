@@ -54,7 +54,7 @@ const Square = ({ character, charId, rowId }) => {
     if (isLoggedIn) {
       if (correctCharAndIndex) return 'bg-green-600'
       else if (charInWord) return 'bg-yellow-600'
-    } else return 'bg-grey-600'
+    } else return 'bg-gray-600'
   }
   const backgroundColor = whichBackground()
   return (
