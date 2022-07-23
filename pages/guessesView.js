@@ -11,7 +11,6 @@ const charIsInWord = (char, word) => {
 }
 
 const charIsInCorrectPlace = (char, index, word) => {
-  console.log(word)
   return word.split('')[index] === char
 }
 
@@ -23,10 +22,10 @@ const GuessesView = () => {
     <div className="grid gap-1">
       {[...Array(6)].map((_, i) => {
         if (i === activeRow) {
-          return <Row rowId={i} key={i} word={activeGuess} />
+          return <Row rowId={i} key={'row' + i} word={activeGuess} />
         } else if (i < activeRow) {
-          return <Row rowId={i} key={i} word={lockedInGuesses[i]} />
-        } else return <Row rowId={i} key={i} word={''} />
+          return <Row rowId={i} key={'row' + i} word={lockedInGuesses[i]} />
+        } else return <Row rowId={i} key={'row' + i} word={''} />
       })}
     </div>
   )
@@ -36,7 +35,12 @@ const Row = ({ rowId, word }) => {
   return (
     <div className="flex justify-center gap-1">
       {[...Array(5)].map((_, i) => (
-        <Square key={i} character={word[i]} charId={i} rowId={rowId} />
+        <Square
+          key={'square' + i}
+          character={word[i]}
+          charId={i}
+          rowId={rowId}
+        />
       ))}
     </div>
   )
