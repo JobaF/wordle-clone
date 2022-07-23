@@ -1,4 +1,15 @@
-const handleKeyDown = (event) => {
+import { useAtom } from 'jotai'
+import {
+  activeGuessAtom,
+  activeRowAtom,
+  lockedInGuessesAtom,
+} from './atomDefinitions'
+
+export const handleKeyDown = (event) => {
+  const [activeGuess, setActiveGuess] = useAtom(activeGuessAtom)
+  const [activeRow, setActiveRow] = useAtom(activeRowAtom)
+  const [lockedInGuesses, setLockedInGuesses] = useAtom(lockedInGuessesAtom)
+
   // Alphabetic key
   if (event.keyCode >= 65 && event.keyCode <= 90 && activeRow <= 5) {
     setActiveGuess((oldGuess) =>
@@ -10,11 +21,10 @@ const handleKeyDown = (event) => {
   // Enter key
   else if (event.keyCode === 13) {
     if (activeGuess.length === 5 && activeRow <= 5) {
-      checkWord(activeGuess)
-      setActiveRow(activeRow + 1)
+      setActiveRow((activeRow) => activeRow + 1)
       let newGuesses = [...guesses]
       newGuesses[activeRow] = activeGuess
-      setGuesses(newGuesses)
+      setLockedInGuesses(newGuesses)
       setActiveGuess('')
     }
   }
