@@ -15,9 +15,9 @@ const KeysView = () => {
 
 const KeyRow = ({ keyRow }) => {
   return (
-    <div className="flex justify-center gap-1">
+    <div className="flex justify-center gap-0.5 md:gap-1">
       {keyRow.map((key, i) => (
-        <Key char={key} />
+        <Key key={'key' + i} char={key} />
       ))}
     </div>
   )
@@ -25,7 +25,7 @@ const KeyRow = ({ keyRow }) => {
 
 const Key = ({ char }) => {
   return (
-    <div className="border-black/40 border w-12 h-12 text-2xl flex justify-center items-center">
+    <div className="bg-gray-300 rounded-md border w-7 h-9  md:w-12 md:h-16 text-xl md:text-xl flex justify-center items-center">
       {char}
     </div>
   )
