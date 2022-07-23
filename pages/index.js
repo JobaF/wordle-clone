@@ -3,14 +3,46 @@ import { solutionWordAtom } from '../helpers/atomDefinitions'
 import { useAtom } from 'jotai'
 import { useEffect } from 'react'
 import { getSolutionWord } from '../helpers/getSolutionWord'
-import { handleKeyDown } from '../helpers/handleKeyInput'
+import {
+  activeGuessAtom,
+  activeRowAtom,
+  lockedInGuessesAtom,
+} from '../helpers/atomDefinitions'
 
 export default function Home() {
   const [solution, setSolution] = useAtom(solutionWordAtom)
+  const [activeGuess, setActiveGuess] = useAtom(activeGuessAtom)
+  const [activeRow, setActiveRow] = useAtom(activeRowAtom)
+  const [lockedInGuesses, setLockedInGuesses] = useAtom(lockedInGuessesAtom)
 
   useEffect(() => {
     setSolution(getSolutionWord)
   }, [])
+
+  const handleKeyDown = (event) => {
+    // Alphabetic key
+    if (event.keyCode >= 65 && event.keyCode <= 90 && activeRow <= 5) {
+      setActiveGuess((oldGuess) =>
+        oldGuess.length < 5
+          ? oldGuess + String(event.key).toUpperCase()
+          : oldGuess,
+      )
+    }
+    // Enter key
+    else if (event.keyCode === 13) {
+      if (activeGuess.length === 5 && activeRow <= 5) {
+        setActiveRow((activeRow) => activeRow + 1)
+        let newGuesses = [...lockedInGuesses]
+        newGuesses[activeRow] = activeGuess
+        setLockedInGuesses(newGuesses)
+        setActiveGuess('')
+      }
+    }
+    // Backspace
+    else if (event.keyCode === 8) {
+      setActiveGuess((oldGuess) => oldGuess.slice(0, oldGuess.length - 1))
+    }
+  }
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown)

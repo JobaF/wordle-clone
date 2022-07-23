@@ -1,4 +1,4 @@
-const GuessesView = ({}) => {
+const GuessesView = () => {
   return (
     <div className="grid gap-1">
       {[...Array(6)].map((_, i) => (
