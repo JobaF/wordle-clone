@@ -64,7 +64,7 @@ const Square = ({ character, charId, rowId }) => {
   const backgroundColor = whichBackground()
   return (
     <div
-      className={`${backgroundColor} border-black/40 border-2 w-12 h-12 md:w-24 md:h-24 text-5xl flex justify-center items-center`}
+      className={`${backgroundColor} border-black/40 border-2 w-14 h-14 md:w-24 md:h-24 text-2xl md:text-5xl flex justify-center items-center`}
     >
       {character}
     </div>
