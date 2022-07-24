@@ -1,4 +1,4 @@
-import GuessesView from './GuessesView'
+import GuessesView from '../components/GuessesView'
 import { solutionWordAtom } from '../helpers/atomDefinitions'
 import { useAtom } from 'jotai'
 import { useEffect } from 'react'
@@ -8,7 +8,7 @@ import {
   activeRowAtom,
   lockedInGuessesAtom,
 } from '../helpers/atomDefinitions'
-import KeysView from './KeysView'
+import KeysView from '../components/KeysView'
 
 export default function Home() {
   const [solution, setSolution] = useAtom(solutionWordAtom)
