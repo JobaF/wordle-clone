@@ -15,9 +15,9 @@ const charIsInCorrectPlace = (char, index, word) => {
 }
 
 const GuessesView = () => {
-  const [activeGuess, setActiveGuess] = useAtom(activeGuessAtom)
-  const [activeRow, setActiveRow] = useAtom(activeRowAtom)
-  const [lockedInGuesses, setLockedInGuesses] = useAtom(lockedInGuessesAtom)
+  const [activeGuess] = useAtom(activeGuessAtom)
+  const [activeRow] = useAtom(activeRowAtom)
+  const [lockedInGuesses] = useAtom(lockedInGuessesAtom)
   return (
     <div className="grid gap-1">
       {[...Array(6)].map((_, i) => {
@@ -44,8 +44,8 @@ const Row = ({ rowId, word }) => {
 }
 
 const Square = ({ character, charId, rowId }) => {
-  const [activeRow, setActiveRow] = useAtom(activeRowAtom)
-  const [correctWord, setCorrectWord] = useAtom(solutionWordAtom)
+  const [activeRow] = useAtom(activeRowAtom)
+  const [correctWord] = useAtom(solutionWordAtom)
   const correctCharAndIndex = character
     ? charIsInCorrectPlace(character, charId, correctWord)
     : false

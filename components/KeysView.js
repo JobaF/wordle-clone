@@ -25,7 +25,15 @@ const KeyRow = ({ keyRow }) => {
 
 const Key = ({ char }) => {
   return (
-    <div className="bg-gray-300 rounded-md border w-7 h-9  md:w-12 md:h-16 text-xl md:text-xl flex justify-center items-center">
+    <div
+      style={{
+        MozUserSelect: 'none',
+        WebkitUserSelect: 'none',
+        msUserSelect: 'none',
+        cursor: 'pointer',
+      }}
+      className="bg-gray-300 rounded-md border w-7 h-9  md:w-12 md:h-16 text-xl md:text-xl flex justify-center items-center"
+    >
       {char}
     </div>
   )
