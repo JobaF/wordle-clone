@@ -1,8 +1,8 @@
 const KeysView = () => {
   const keyboardLayout = [
-    'qwertzuiop'.split(''),
-    'asdfghjkl'.split(''),
-    'yxcvbnm'.split(''),
+    'QWERTZUIOP'.split(''),
+    'ASDFGHJKL'.split(''),
+    'YXCVBNM'.split(''),
   ]
   return (
     <div className="flex gap-1 flex-col">
@@ -32,6 +32,7 @@ const Key = ({ char }) => {
         msUserSelect: 'none',
         cursor: 'pointer',
       }}
+      onClick={() => handleKeyClick(char)}
       className="bg-gray-300 rounded-md border w-7 h-9  md:w-12 md:h-16 text-xl md:text-xl flex justify-center items-center"
     >
       {char}
@@ -40,3 +41,7 @@ const Key = ({ char }) => {
 }
 
 export default KeysView
+
+const handleKeyClick = (char) => {
+  console.log(char)
+}
