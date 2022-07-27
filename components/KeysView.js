@@ -34,7 +34,13 @@ const Key = ({ char }) => {
       setActiveGuess((lastGuess) => lastGuess + char)
     }
   }
-  if (char === 'BACK') return <BackSpaceIcon />
+  const handleBackspaceClick = () => {
+    if (activeRow < 6 && activeGuess.length <= 5 && activeGuess.length > 0) {
+      setActiveGuess((lastGuess) => lastGuess.slice(0, lastGuess.length - 1))
+    }
+  }
+  if (char === 'BACK')
+    return <BackSpaceIcon handleBackspaceClick={() => handleBackspaceClick()} />
   return (
     <div
       style={{
@@ -51,9 +57,13 @@ const Key = ({ char }) => {
   )
 }
 
-const BackSpaceIcon = () => {
+const BackSpaceIcon = ({ handleBackspaceClick }) => {
   return (
-    <div className="flex justify-center items-center w-7 h-9 md:w-12 md:h-16 bg-gray-300 rounded-md border">
+    <div
+      style={{ cursor: 'pointer' }}
+      onClick={handleBackspaceClick}
+      className="flex justify-center items-center w-7 h-9 md:w-12 md:h-16 bg-gray-300 rounded-md border"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-6"
