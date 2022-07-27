@@ -1,3 +1,6 @@
+import { activeRowAtom, activeGuessAtom } from '../helpers/atomDefinitions'
+import { useAtom } from 'jotai'
+
 const KeysView = () => {
   const keyboardLayout = [
     'QWERTZUIOP'.split(''),
@@ -24,6 +27,13 @@ const KeyRow = ({ keyRow }) => {
 }
 
 const Key = ({ char }) => {
+  const [activeRow] = useAtom(activeRowAtom)
+  const [activeGuess, setActiveGuess] = useAtom(activeGuessAtom)
+  const handleKeyClick = (char) => {
+    if (activeRow < 6 && activeGuess.length < 5) {
+      setActiveGuess((lastGuess) => lastGuess + char)
+    }
+  }
   return (
     <div
       style={{
@@ -41,7 +51,3 @@ const Key = ({ char }) => {
 }
 
 export default KeysView
-
-const handleKeyClick = (char) => {
-  console.log(char)
-}
