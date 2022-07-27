@@ -34,14 +34,11 @@ const GuessesView = () => {
 const Row = ({ rowId, word }) => {
   return (
     <div className="flex justify-center gap-1">
-      {[...Array(5)].map((_, i) => (
-        <Square
-          key={'square' + i}
-          character={word[i]}
-          charId={i}
-          rowId={rowId}
-        />
-      ))}
+      <Square key={'square' + 0} character={word[0]} charId={0} rowId={rowId} />
+      <Square key={'square' + 1} character={word[1]} charId={1} rowId={rowId} />
+      <Square key={'square' + 2} character={word[2]} charId={2} rowId={rowId} />
+      <Square key={'square' + 3} character={word[3]} charId={3} rowId={rowId} />
+      <Square key={'square' + 4} character={word[4]} charId={4} rowId={rowId} />
     </div>
   )
 }

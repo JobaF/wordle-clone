@@ -46,17 +46,17 @@ export default function Home() {
   }
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown)
+    window?.addEventListener('keydown', handleKeyDown)
     // cleanup this component
     return () => {
-      window.removeEventListener('keydown', handleKeyDown)
+      window?.removeEventListener('keydown', handleKeyDown)
     }
   }, [handleKeyDown])
 
   return (
     <div className="mt-6">
       <GuessesView />
-      {solution}
+      <div>{solution}</div>
       <KeysView />
     </div>
   )
