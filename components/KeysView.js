@@ -2,8 +2,9 @@ import {
   activeRowAtom,
   activeGuessAtom,
   lockedInGuessesAtom,
+  isGuessAllowed,
 } from '../helpers/atomDefinitions'
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
 
 const KeysView = () => {
   const keyboardLayout = [
@@ -34,6 +35,7 @@ const Key = ({ char }) => {
   const [activeRow, setActiveRow] = useAtom(activeRowAtom)
   const [activeGuess, setActiveGuess] = useAtom(activeGuessAtom)
   const [lockedInGuesses, setLockedInGuesses] = useAtom(lockedInGuessesAtom)
+  const isWordAllowed = useAtomValue(isGuessAllowed)
 
   const handleKeyClick = (char) => {
     if (activeRow < 6 && activeGuess.length < 5) {
@@ -46,7 +48,7 @@ const Key = ({ char }) => {
     }
   }
   const handleEnterClick = () => {
-    if (activeGuess.length === 5 && activeRow <= 5) {
+    if (activeGuess.length === 5 && activeRow <= 5 && isWordAllowed) {
       setActiveRow((activeRow) => activeRow + 1)
       let newGuesses = [...lockedInGuesses]
       newGuesses[activeRow] = activeGuess

@@ -1,29 +1,26 @@
 import GuessesView from '../components/GuessesView'
 import { solutionWordAtom } from '../helpers/atomDefinitions'
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
 import { useEffect } from 'react'
 import { getSolutionWord } from '../helpers/getSolutionWord'
 import {
   activeGuessAtom,
   activeRowAtom,
   lockedInGuessesAtom,
+  isGuessAllowed,
 } from '../helpers/atomDefinitions'
 import KeysView from '../components/KeysView'
-import { allWords } from '../files/words'
 
 export default function Home() {
   const [solution, setSolution] = useAtom(solutionWordAtom)
   const [activeGuess, setActiveGuess] = useAtom(activeGuessAtom)
   const [activeRow, setActiveRow] = useAtom(activeRowAtom)
   const [lockedInGuesses, setLockedInGuesses] = useAtom(lockedInGuessesAtom)
+  const isWordAllowed = useAtomValue(isGuessAllowed)
 
   useEffect(() => {
     setSolution(getSolutionWord)
   }, [])
-
-  const isWordAllowed = (word) => {
-    return allWords.includes(word)
-  }
 
   const handleKeyDown = (event) => {
     // Alphabetic key
@@ -36,7 +33,7 @@ export default function Home() {
     }
     // Enter key
     else if (event.keyCode === 13) {
-      if (activeGuess.length === 5 && activeRow <= 5) {
+      if (activeGuess.length === 5 && activeRow <= 5 && isWordAllowed) {
         setActiveRow((activeRow) => activeRow + 1)
         let newGuesses = [...lockedInGuesses]
         newGuesses[activeRow] = activeGuess
