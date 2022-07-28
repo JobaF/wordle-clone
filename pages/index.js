@@ -69,7 +69,7 @@ export default function Home() {
   }, [handleKeyDown])
 
   return (
-    <div className="h-screen flex flex-col justify-between ">
+    <div className="h-screen flex flex-col justify-around ">
       <GuessesView />
       <KeysView />
     </div>

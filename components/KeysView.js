@@ -14,7 +14,7 @@ const KeysView = () => {
     'YXCVBNM'.split(''),
   ]
   return (
-    <div className="mb-8 flex gap-1 flex-col">
+    <div className="mb-10 flex gap-1 flex-col">
       {keyboardLayout.map((keyboardRow, id) => (
         <KeyRow key={'keyboardRow' + id} keyRow={keyboardRow} />
       ))}
