@@ -3,6 +3,7 @@ import {
   activeGuessAtom,
   lockedInGuessesAtom,
   isGuessAllowed,
+  gameEndedAtom,
 } from '../helpers/atomDefinitions'
 import { useAtom, useAtomValue } from 'jotai'
 
@@ -32,28 +33,40 @@ const KeyRow = ({ keyRow }) => {
 }
 
 const Key = ({ char }) => {
+  const [gameEnded, setGameEnded] = useAtom(gameEndedAtom)
   const [activeRow, setActiveRow] = useAtom(activeRowAtom)
   const [activeGuess, setActiveGuess] = useAtom(activeGuessAtom)
   const [lockedInGuesses, setLockedInGuesses] = useAtom(lockedInGuessesAtom)
   const isWordAllowed = useAtomValue(isGuessAllowed)
 
   const handleKeyClick = (char) => {
-    if (activeRow < 6 && activeGuess.length < 5) {
+    if (activeRow < 6 && activeGuess.length < 5 && !gameEnded) {
       setActiveGuess((lastGuess) => lastGuess + char)
     }
   }
   const handleBackspaceClick = () => {
-    if (activeRow < 6 && activeGuess.length <= 5 && activeGuess.length > 0) {
+    if (
+      activeRow < 6 &&
+      activeGuess.length <= 5 &&
+      activeGuess.length > 0 &&
+      !gameEnded
+    ) {
       setActiveGuess((lastGuess) => lastGuess.slice(0, lastGuess.length - 1))
     }
   }
   const handleEnterClick = () => {
-    if (activeGuess.length === 5 && activeRow <= 5 && isWordAllowed) {
+    if (
+      activeGuess.length === 5 &&
+      activeRow <= 5 &&
+      isWordAllowed &&
+      !gameEnded
+    ) {
       setActiveRow((activeRow) => activeRow + 1)
       let newGuesses = [...lockedInGuesses]
       newGuesses[activeRow] = activeGuess
       setLockedInGuesses(newGuesses)
       setActiveGuess('')
+      if (activeRow === 6) setGameEnded(true)
     }
   }
 
