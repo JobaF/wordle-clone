@@ -20,7 +20,7 @@ const GuessesView = () => {
   const [activeRow] = useAtom(activeRowAtom)
   const [lockedInGuesses] = useAtom(lockedInGuessesAtom)
   return (
-    <div className="grid gap-1">
+    <div className="grid gap-1 mt-8">
       {[...Array(6)].map((_, i) => {
         if (i === activeRow) {
           return <Row rowId={i} key={'row' + i} word={activeGuess} />
