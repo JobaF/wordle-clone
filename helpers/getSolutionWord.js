@@ -1,4 +1,4 @@
-import words from '../files/words'
+import { words } from '../files/words'
 
 export const getSolutionWord = () => {
   const randomNumber = Math.floor(Math.random() * words.length)
