@@ -1,4 +1,4 @@
-export const wordArray = [
+export const allWords = [
   'aahed',
   'aalii',
   'aargh',

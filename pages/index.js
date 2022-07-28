@@ -9,6 +9,7 @@ import {
   lockedInGuessesAtom,
 } from '../helpers/atomDefinitions'
 import KeysView from '../components/KeysView'
+import { allWords } from '../files/words'
 
 export default function Home() {
   const [solution, setSolution] = useAtom(solutionWordAtom)
@@ -19,6 +20,10 @@ export default function Home() {
   useEffect(() => {
     setSolution(getSolutionWord)
   }, [])
+
+  const isWordAllowed = (word) => {
+    return allWords.includes(word)
+  }
 
   const handleKeyDown = (event) => {
     // Alphabetic key
