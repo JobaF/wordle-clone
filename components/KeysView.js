@@ -7,9 +7,9 @@ import { useAtom } from 'jotai'
 
 const KeysView = () => {
   const keyboardLayout = [
-    'QWERTZUIOP'.split(''),
-    'ASDFGHJKL'.split(''),
-    ['ENTER', 'YXCVBNM'.split(''), 'BACK'].flat(),
+    ['QWERTZUIOP'.split(''), 'BACK'].flat(),
+    ['ASDFGHJKL'.split(''), 'ENTER'].flat(),
+    'YXCVBNM'.split(''),
   ]
   return (
     <div className="flex gap-1 flex-col">
@@ -44,6 +44,7 @@ const Key = ({ char }) => {
     }
   }
   const handleEnterClick = () => {}
+
   if (char === 'BACK') {
     return <BackSpaceIcon handleBackspaceClick={() => handleBackspaceClick()} />
   }
@@ -71,7 +72,7 @@ const BackSpaceIcon = ({ handleBackspaceClick }) => {
     <div
       style={{ cursor: 'pointer' }}
       onClick={handleBackspaceClick}
-      className="flex justify-center items-center w-7 h-9 md:w-12 md:h-16 bg-gray-300 rounded-md border"
+      className="flex justify-center items-center w-7 h-9 md:w-12 md:h-16 bg-gray-400 rounded-md border"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +97,7 @@ const EnterIcon = ({ handleEnterClick }) => {
     <div
       style={{ cursor: 'pointer' }}
       onClick={handleEnterClick}
-      className="flex justify-center items-center w-7 h-9 md:w-12 md:h-16 bg-gray-300 rounded-md border"
+      className="flex justify-center items-center w-7 h-9 md:w-12 md:h-16 bg-gray-400 rounded-md border"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
