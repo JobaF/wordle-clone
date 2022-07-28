@@ -1,9 +1,10 @@
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
 import {
   activeGuessAtom,
   activeRowAtom,
   lockedInGuessesAtom,
-  solutionWordAtom,
+  getSolutionWord,
+  getActiveRow,
 } from '../helpers/atomDefinitions'
 
 const charIsInWord = (char, word) => {
@@ -44,8 +45,8 @@ const Row = ({ rowId, word }) => {
 }
 
 const Square = ({ character, charId, rowId }) => {
-  const [activeRow] = useAtom(activeRowAtom)
-  const [correctWord] = useAtom(solutionWordAtom)
+  const activeRow = useAtomValue(getActiveRow)
+  const correctWord = useAtomValue(getSolutionWord)
   const correctCharAndIndex = character
     ? charIsInCorrectPlace(character, charId, correctWord)
     : false

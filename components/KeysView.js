@@ -1,4 +1,8 @@
-import { activeRowAtom, activeGuessAtom } from '../helpers/atomDefinitions'
+import {
+  activeRowAtom,
+  activeGuessAtom,
+  getActiveRow,
+} from '../helpers/atomDefinitions'
 import { useAtom } from 'jotai'
 
 const KeysView = () => {
@@ -27,7 +31,7 @@ const KeyRow = ({ keyRow }) => {
 }
 
 const Key = ({ char }) => {
-  const [activeRow] = useAtom(activeRowAtom)
+  const activeRow = useAtom(getActiveRow)
   const [activeGuess, setActiveGuess] = useAtom(activeGuessAtom)
   const handleKeyClick = (char) => {
     if (activeRow < 6 && activeGuess.length < 5) {
@@ -39,9 +43,7 @@ const Key = ({ char }) => {
       setActiveGuess((lastGuess) => lastGuess.slice(0, lastGuess.length - 1))
     }
   }
-  const handleEnterClick = () => {
-    setActiveGuess((lastGuess) => lastGuess.slice(0, lastGuess.length - 1))
-  }
+  const handleEnterClick = () => {}
   if (char === 'BACK') {
     return <BackSpaceIcon handleBackspaceClick={() => handleBackspaceClick()} />
   }
